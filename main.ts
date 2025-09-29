@@ -7,6 +7,9 @@ enum WiFiMode {
     //% block="AP+STA 模式"
     AP_STA = 3
 }
+declare interface Math {
+    floor(x: number): number;
+}
 enum UARTChannel {
     //% block="UART1"
     UART1 = 1,
