@@ -14,5 +14,5 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-BMduinoKit-SmartHome=https://github.com/BestModules-Libraries/pxt-BMduinoKit-SmartHome
+https://github.com/BestModules-Libraries/pxt-BMduinoKit-SmartHome
 ```
