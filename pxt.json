@@ -1,6 +1,6 @@
 {
     "name": "BMduinoKit-SmartHome",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Microsoft MakeCode package for SmartHome(BMduino Kit)",
     "license": "MIT",
     "dependencies": {
