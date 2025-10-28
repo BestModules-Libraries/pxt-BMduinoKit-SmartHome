@@ -204,140 +204,55 @@ namespace 智慧家居 {
         let command6 = "AT+MQTTPUB=" + topic1 + ",1,0," + data_buf7 + "\r\n";
         let command7 = "AT+MQTTPUB=" + topic1 + ",1,0," + data_buf8 + "\r\n";
 
-        if (data != 0) {
-            serial.writeString(command);
-            basic.pause(500);
-            response = readResponse();
-            if (response.includes("ERROR")) {
-                //智慧家居.clear();
-                //智慧家居.writeStringNewLine("Upload Fail");
-                basic.pause(500);
-            } else {
-                //智慧家居.clear();
-                //智慧家居.writeStringNewLine("Upload Successful");
-                basic.pause(500);
+        for (let i = 0; i < 8; i++) {
+            let retryCount = 0;
+            let success = false;
+            let currentCommand = "";
+
+            switch (i) {
+                case 0:
+                    currentCommand = command;
+                    break;
+                case 1:
+                    currentCommand = command1;
+                    break;
+                case 2:
+                    currentCommand = command2;
+                    break;
+                case 3:
+                    currentCommand = command3;
+                    break;
+                case 4:
+                    currentCommand = command4;
+                    break;
+                case 5:
+                    currentCommand = command5;
+                    break;
+                case 6:
+                    currentCommand = command6;
+                    break;
+                case 7:
+                    currentCommand = command7;
+                    break;
             }
 
-            if (data1 != 0) {
-                serial.writeString(command1);
+            while (retryCount <= 2 && !success) {
+                serial.writeString(currentCommand);
                 basic.pause(500);
                 response = readResponse();
+
                 if (response.includes("ERROR")) {
-                    //智慧家居.clear();
-                    //智慧家居.writeStringNewLine("Upload Fail");
-                    basic.pause(500);
+                    retryCount++;
+                    if (retryCount <= 2) {
+                        basic.pause(500);
+                    }
                 } else {
-                    //智慧家居.clear();
-                    //智慧家居.writeStringNewLine("Upload Successful");
+                    success = true;
                     basic.pause(500);
                 }
-
-                if (data2 != 0) {
-                    serial.writeString(command2);
-                    basic.pause(500);
-                    response = readResponse();
-                    if (response.includes("ERROR")) {
-                        //智慧家居.clear();
-                        //智慧家居.writeStringNewLine("Upload Fail");
-                        basic.pause(500);
-                    } else {
-                        //智慧家居.clear();
-                        //智慧家居.writeStringNewLine("Upload Successful");
-                        basic.pause(500);
-                    }
-
-                    if (data3 != 0) {
-                        serial.writeString(command3);
-                        basic.pause(500);
-                        response = readResponse();
-                        if (response.includes("ERROR")) {
-                            //智慧家居.clear();
-                            //智慧家居.writeStringNewLine("Upload Fail");
-                            basic.pause(500);
-                        } else {
-                            //智慧家居.clear();
-                            //智慧家居.writeStringNewLine("Upload Successful");
-                            basic.pause(500);
-                        }
-
-                        if (data4 != 0) {
-                            serial.writeString(command4);
-                            basic.pause(500);
-                            response = readResponse();
-                            if (response.includes("ERROR")) {
-                                //智慧家居.clear();
-                                //智慧家居.writeStringNewLine("Upload Fail");
-                                basic.pause(500);
-                            } else {
-                                //智慧家居.clear();
-                                //智慧家居.writeStringNewLine("Upload Successful");
-                                basic.pause(500);
-                            }
-
-                            if (data5 != 0) {
-                                serial.writeString(command5);
-                                basic.pause(500);
-                                response = readResponse();
-                                if (response.includes("ERROR")) {
-                                    //智慧家居.clear();
-                                    //智慧家居.writeStringNewLine("Upload Fail");
-                                    basic.pause(500);
-                                } else {
-                                    //智慧家居.clear();
-                                    //智慧家居.writeStringNewLine("Upload Successful");
-                                    basic.pause(500);
-                                }
-
-                                if (data6 != 0) {
-                                    serial.writeString(command6);
-                                    basic.pause(500);
-                                    response = readResponse();
-                                    if (response.includes("ERROR")) {
-                                        //智慧家居.clear();
-                                        //智慧家居.writeStringNewLine("Upload Fail");
-                                        basic.pause(500);
-                                    } else {
-                                        //智慧家居.clear();
-                                        //智慧家居.writeStringNewLine("Upload Successful");
-                                        basic.pause(500);
-                                    }
-
-                                    if (data7 != 0) {
-                                        serial.writeString(command7);
-                                        basic.pause(500);
-                                        response = readResponse();
-                                        if (response.includes("ERROR")) {
-                                            //智慧家居.clear();
-                                            //智慧家居.writeStringNewLine("Upload Fail");
-                                            basic.pause(500);
-                                        } else {
-                                            //智慧家居.clear();
-                                            //智慧家居.writeStringNewLine("Upload Successful");
-                                            basic.pause(500);
-                                        }
-
-                                    } else if (data7 <= 0) {
-                                        return;
-                                    }
-                                } else if (data6 <= 0) {
-                                    return;
-                                }
-                            } else if (data5 <= 0) {
-                                return;
-                            }
-                        } else if (data4 <= 0) {
-                            return;
-                        }
-                    } else if (data3 <= 0) {
-                        return;
-                    }
-                } else if (data2 <= 0) {
-                    return;
-                }
-            } else if (data1 <= 0) {
-                return;
             }
         }
+    
     }
 
 
